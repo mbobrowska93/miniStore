@@ -1,1 +1,21 @@
-<p>products works!</p>
+<table class="myTable">
+    <thead>
+        <tr>
+          <th>Id</th>
+          <td>Name</td>
+          <td>Price</td>
+          <td>Options</td>
+        </tr>
+      </thead>
+
+     <tbody> 
+        <tr *ngFor="let product of productsArray">
+            <th scope="row">{{product.id}}.</th>
+            <td>{{product.name}}</td>
+            <td>{{product.price}} PLN</td>
+            <td><button (click)="addToCart(product)" class="addToCart"><i class='fas fa-shopping-cart'></i></button> &nbsp; <button class="openImage"><i class='far fa-image'></i></button></td>
+        </tr>
+    </tbody>
+</table>
+
+<router-outlet></router-outlet>

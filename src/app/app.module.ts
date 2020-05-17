@@ -1,22 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './products/products.component';
-import { CartComponent } from './cart/cart.component';
+import { OurProductsService } from './our-products.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsComponent,
-    CartComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [OurProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

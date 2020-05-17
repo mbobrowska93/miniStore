@@ -1,1 +1,29 @@
 <p>cart works!</p>
+
+<table class="myTable">
+    <thead>
+        <tr>
+          <th>Id</th>
+          <td>Name</td>
+          <td>Price</td>
+          <td>Quantity</td>
+          <td>Total cost</td>
+          <td>Options</td>
+        </tr>
+      </thead>
+
+     <tbody> 
+        <tr *ngFor="let finalProduct of finalProductsArray">
+            <th scope="row">{{finalProduct.finalId}}.</th>
+            <td>{{finalProduct.product.name}}</td>
+            <td>{{finalProduct.product.price}} PLN</td>
+            <td><button (click)="counterMinus(finalProduct.product.price)" class="plusminus">-</button> &nbsp; <input type="text" class="quantity" [(ngModel)]="counter"> &nbsp; <button (click)="counterPlus(finalProduct.product.price)" class="plusminus">+</button> </td>
+            <td><input type="text" class="totalCost" [(ngModel)]="totalCost"> PLN </td>
+            <td><button (click)="removeProduct(finalProduct)" class="removeIt">X</button></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<router-outlet></router-outlet>
