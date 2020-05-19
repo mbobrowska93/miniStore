@@ -1,18 +1,20 @@
 <input class="search" placeholder="Search by name" [(ngModel)]="searchText"><br><br>
+<div>
 <table class="myTable">
     <thead>
         <tr>
-            <th>Id</th>
-            <td>Image</td>
-            <td>Name</td>
-            <td>Price</td>
-            <td>Options</td>
+            <th>ID</th>
+            <td>IMAGE</td>
+            <td>NAME</td>
+            <td>PRICE</td>
+            <td>OPTIONS</td>
         </tr>
     </thead>
 
     <tbody>
-        <tr *ngFor="let product of productsArray | filterPipe :searchText">
-            <th scope="row">{{product.id}}.</th>
+        <tr
+            *ngFor="let product of productsArray | filterPipe :searchText | paginate: { id: 'listing_pagination', itemsPerPage: 10, currentPage: page, totalItems: totalRecords}">
+            <th>{{product.id}}.</th>
             <td><a href="{{product.image}}"><img src="{{product.image}}" alt="Photo" class="photo"></a></td>
             <td>{{product.name}}</td>
             <td>{{product.price}} PLN</td>
@@ -20,6 +22,10 @@
         </tr>
     </tbody>
 </table>
-
+</div>
+<div style="margin-left: 180px; margin-top: 20px;">
+    <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event">
+    </pagination-controls>
+</div>
 
 <router-outlet></router-outlet>

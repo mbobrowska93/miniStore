@@ -1,12 +1,12 @@
 <table class="myTable">
     <thead>
         <tr>
-            <th>Id</th>
-            <td>Name</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            <td>Total cost</td>
-            <td>Options</td>
+            <th>ID</th>
+            <td>NAME</td>
+            <td>PRICE</td>
+            <td>QUANTITY</td>
+            <td>TOTAL COST</td>
+            <td>OPTIONS</td>
         </tr>
     </thead>
 
@@ -21,16 +21,17 @@
             <td>
                 <span>{{finalProduct.product.price * finalProduct.count}}</span> PLN
             </td>
-            <td><button (click)="removeProduct(finalProduct)" class="removeIt">X</button> 
-                &nbsp; <a href="{{finalProduct.product.image}}" target="_blank"><button class="openImage"><i class='far fa-image'></i></button></a></td>
+            <td><button (click)="removeProduct(finalProduct)" class="removeIt">X</button>
+                &nbsp; <a href="{{finalProduct.product.image}}" target="_blank"><button class="openImage"><i
+                            class='far fa-image'></i></button></a></td>
         </tr>
     </tbody>
 </table>
 
 <br>
 
-<table class="myTable" style="padding: 5px">
+<div style="text-align:center; font-weight: bold;">
     Your order: {{totalCost}} PLN
-</table>
+</div>
 
 <router-outlet></router-outlet>

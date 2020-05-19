@@ -5,6 +5,8 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OurProductsService } from './our-products.service';
 import { FilterPipePipe } from './filter-pipe.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { FilterPipePipe } from './filter-pipe.pipe';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [OurProductsService],
   bootstrap: [AppComponent]

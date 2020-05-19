@@ -3,7 +3,7 @@
     float: center;
     width: 40px;
     height: 30px;
-    border: 1px solid lightgray;
+    /*border: 1px solid lightgray;*/
     border-radius: 4px;
 }
 
@@ -11,18 +11,23 @@
     width: 600px;
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 5px 10px 18px #888888;
+    border: 1px solid lightgray; 
+    
 }
 td, th {
     padding: 5px;
-    border: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     height: 50px;
-   
 }
 
 .search{
     width: 450px;
     height: 40px;
     margin-left: 100px;
+    border: 1px solid lightgrey;
+    padding-left: 5px;
 }
 
 .photo{
@@ -30,3 +35,8 @@ td, th {
     width: auto;
 }
 
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+thead{
+    font-weight: bold;
+}

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { OurProductsService } from '../our-products.service';
 import { Product } from '../product';
-
 
 @Component({
   selector: 'app-products',
@@ -12,6 +11,8 @@ import { Product } from '../product';
 })
 export class ProductsComponent implements OnInit {
 
+  page = 1;
+  totalRecords: string;
   productsArray: Product[] = [];
   count = 0;
   finalId = 0;
@@ -24,11 +25,7 @@ export class ProductsComponent implements OnInit {
 
   }
   addToCart(myProduct: Product) {
-    // this.count += 1;
-    // this.finalId += 1;  // final id i count caly czas pokazuje nam 1, bo po przekierowaniu do koszyka nam to zeruje
     this.ourProductsService.writeOnTheList(myProduct);
     this.router.navigateByUrl('/cart', {});
-    console.log('Id dodanego produktu:', this.finalId);
   }
-
 }

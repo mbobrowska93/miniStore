@@ -4,7 +4,6 @@ import { FormBuilder } from '@angular/forms';
 import { OurProductsService } from '../our-products.service';
 import { FinalProduct } from '../finalProduct';
 
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -13,8 +12,6 @@ import { FinalProduct } from '../finalProduct';
 export class CartComponent implements OnInit {
 
   finalProductsArray: FinalProduct[] = [];
-  finalProductsArrayRefresh: FinalProduct[] = []; // odswiezenie tablicy po usunieciu pozycji
-  // counter: number;
   totalCost: number;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private ourProductsService: OurProductsService) { }
@@ -35,11 +32,8 @@ export class CartComponent implements OnInit {
   }
 
   removeProduct(position: FinalProduct) {
-    console.log(position.finalId); // OK
     this.ourProductsService.remove(position);
     this.finalProductsArray = this.ourProductsService.returnFinalProducts();
     this.totalCost = this.ourProductsService.returnPrice();
   }
-
-
 }
