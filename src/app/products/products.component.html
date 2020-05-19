@@ -1,21 +1,25 @@
+<input class="search" placeholder="Search by name" [(ngModel)]="searchText"><br><br>
 <table class="myTable">
     <thead>
         <tr>
-          <th>Id</th>
-          <td>Name</td>
-          <td>Price</td>
-          <td>Options</td>
+            <th>Id</th>
+            <td>Image</td>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Options</td>
         </tr>
-      </thead>
+    </thead>
 
-     <tbody> 
-        <tr *ngFor="let product of productsArray">
+    <tbody>
+        <tr *ngFor="let product of productsArray | filterPipe :searchText">
             <th scope="row">{{product.id}}.</th>
+            <td><a href="{{product.image}}"><img src="{{product.image}}" alt="Photo" class="photo"></a></td>
             <td>{{product.name}}</td>
             <td>{{product.price}} PLN</td>
-            <td><button (click)="addToCart(product)" class="addToCart"><i class='fas fa-shopping-cart'></i></button> &nbsp; <button class="openImage"><i class='far fa-image'></i></button></td>
+            <td><button (click)="addToCart(product)" class="addToCart"><i class='fas fa-shopping-cart'></i></button>
         </tr>
     </tbody>
 </table>
+
 
 <router-outlet></router-outlet>

@@ -13,14 +13,15 @@ export class OurProductsService {
   private p4: Product = new Product(4, 'Brzanka sumatrzańska', 4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSYecLXW8TpT34mdYBnn5jrrflj8dhgog09M6MH0Nj0FubcBrAa&usqp=CAU');
   private p5: Product = new Product(5, 'Mandaryn wspaniały', 230, 'https://www.wykop.pl/cdn/c3201142/comment_7NwhQfMKZs6VADsv3N2uPQEdYn2YJA1X.jpg');
   private p6: Product = new Product(6, 'Neonek', 2, 'https://www.medianauka.pl/biologia/grafika/ryby/neon-czerwony.jpg');
+  private p7: Product = new Product(7, 'Zebrasoma', 300, 'https://www.reefguard.pl/wp-content/uploads/2016/11/Zebrasoma-flavescens-L.jpg');
 
 
   private myArray: Product[] = [this.p1, this.p2, this.p3, this.p4, this.p5, this.p6];
   private cartArray: FinalProduct[] = [];
-  private cartArrayRefresh: FinalProduct[] = [];
   counter: number;
   totalCost: number;
-  positionToRemove: FinalProduct;
+  price = 0;
+  // positionToRemove: FinalProduct;
 
   constructor() { }
 
@@ -28,45 +29,52 @@ export class OurProductsService {
     return this.myArray;
   }
 
-  writeOnTheList(selectedProduct: Product, count: number, finalId: number) { // tu pewnie zle przekazywane, bo puste wartosci
-    const myFinalProduct: FinalProduct = new FinalProduct(selectedProduct, count, finalId);
-    this.cartArray.push(myFinalProduct);
-    // console.log(myFinalProduct); //
+  returnPrice() {
+    return this.price;
+  }
+
+  writeOnTheList(selectedProduct: Product) {
+
+    if (this.cartArray.filter(x => x.product.id === selectedProduct.id).length > 0) {
+      let position = this.cartArray.findIndex(x => x.product.id === selectedProduct.id);
+
+      this.cartArray[position].count += 1;
+      this.price += selectedProduct.price;
+      console.log(this.price);
+    }
+    else {
+      const myFinalProduct: FinalProduct = new FinalProduct(selectedProduct, 1, this.cartArray.length + 1);
+      this.cartArray.push(myFinalProduct);
+      console.log('dodany produkt, ilosc i nowe id', myFinalProduct);
+      this.price += (myFinalProduct.count * selectedProduct.price);
+      console.log(this.price);
+    }
+  }
+
+  minus(selectedProduct: Product) {
+    if (this.cartArray.filter(x => x.product.id === selectedProduct.id).length > 0) {
+      // sprawdzam wsrod iksow (czyli produktow z tablicy cartArray), czy jakis x (x.product.id) juz istnieje z tym id co moj selected product
+      let position = this.cartArray.findIndex(x => x.product.id === selectedProduct.id);
+      if (this.cartArray[position].count > 0) {
+        this.cartArray[position].count -= 1;
+        this.price -= selectedProduct.price;
+      }
+      else if (this.cartArray[position].count === 0) { // jak juz jest 0 to jeszcze raz trzeba kliknac - zeby usunelo
+        this.cartArray.splice(position, 1);
+        return this.cartArray;
+      }
+    }
+  }
+
+  remove(e: FinalProduct) {
+    console.log('id w koszyku wskazanej do usuniecia pozycji', e.finalId); // OK
+    this.cartArray = this.cartArray.filter(x => x.finalId !== e.finalId);
+    console.log('tablica koszyka po usunieciu pozycji', this.cartArray); // OK
+    this.price -= (e.product.price * e.count);
   }
 
   returnFinalProducts(): FinalProduct[] {
     return this.cartArray;
-  }
-
-  minus(value: number) {
-    value -= 1;
-    this.counter = value;
-  }
-  plus(value: number) {
-    value += 1;
-    this.counter = value;
-  }
-
-  returnQuantity(): number {
-    return this.counter;
-  }
-
-  refresh(price: number) {
-    this.totalCost = price * this.counter;
-  }
-
-  returnTotalCost(): number {
-    return this.totalCost;
-  }
-
-  remove(e: FinalProduct) {
-    console.log(e.finalId); // OK
-    this.cartArrayRefresh = this.cartArrayRefresh.filter(x => x.finalId !== e.finalId);
-    console.log(this.cartArrayRefresh); // EPMTY, NOK ******************* tu nic nie pokazuje
-  }
-
-  returnArray(): FinalProduct[] {
-   return this.cartArrayRefresh;
   }
 
 }

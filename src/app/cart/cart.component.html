@@ -1,29 +1,36 @@
-<p>cart works!</p>
-
 <table class="myTable">
     <thead>
         <tr>
-          <th>Id</th>
-          <td>Name</td>
-          <td>Price</td>
-          <td>Quantity</td>
-          <td>Total cost</td>
-          <td>Options</td>
+            <th>Id</th>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total cost</td>
+            <td>Options</td>
         </tr>
-      </thead>
+    </thead>
 
-     <tbody> 
+    <tbody>
         <tr *ngFor="let finalProduct of finalProductsArray">
             <th scope="row">{{finalProduct.finalId}}.</th>
             <td>{{finalProduct.product.name}}</td>
             <td>{{finalProduct.product.price}} PLN</td>
-            <td><button (click)="counterMinus(finalProduct.product.price)" class="plusminus">-</button> &nbsp; <input type="text" class="quantity" [(ngModel)]="counter"> &nbsp; <button (click)="counterPlus(finalProduct.product.price)" class="plusminus">+</button> </td>
-            <td><input type="text" class="totalCost" [(ngModel)]="totalCost"> PLN </td>
-            <td><button (click)="removeProduct(finalProduct)" class="removeIt">X</button></td>
+            <td><button (click)="counterMinus(finalProduct)" class="plusminus">-</button> &nbsp; <span>
+                    {{finalProduct.count}}</span> &nbsp; <button (click)="counterPlus(finalProduct)"
+                    class="plusminus">+</button> </td>
+            <td>
+                <span>{{finalProduct.product.price * finalProduct.count}}</span> PLN
+            </td>
+            <td><button (click)="removeProduct(finalProduct)" class="removeIt">X</button> 
+                &nbsp; <a href="{{finalProduct.product.image}}" target="_blank"><button class="openImage"><i class='far fa-image'></i></button></a></td>
         </tr>
     </tbody>
 </table>
 
+<br>
 
+<table class="myTable" style="padding: 5px">
+    Your order: {{totalCost}} PLN
+</table>
 
 <router-outlet></router-outlet>

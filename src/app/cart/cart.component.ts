@@ -14,37 +14,31 @@ export class CartComponent implements OnInit {
 
   finalProductsArray: FinalProduct[] = [];
   finalProductsArrayRefresh: FinalProduct[] = []; // odswiezenie tablicy po usunieciu pozycji
-  counter: number;
+  // counter: number;
   totalCost: number;
-
 
   constructor(private router: Router, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private ourProductsService: OurProductsService) { }
 
   ngOnInit(): void {
     this.finalProductsArray = this.ourProductsService.returnFinalProducts();
-    this.counter = 1;
-    // *** tu trzeba wymyslec jak zrobic zeby od poczatku pokazywalo koszt calkowity, czyli przyrownac do ceny jednostkowej
-    this.finalProductsArrayRefresh = this.ourProductsService.returnArray();
+    this.totalCost = this.ourProductsService.returnPrice();
   }
 
-  counterMinus(price: number) {
-    this.ourProductsService.minus(this.counter);
-    this.counter = this.ourProductsService.returnQuantity();
-    this.ourProductsService.refresh(price);
-    this.totalCost = this.ourProductsService.returnTotalCost();
+  counterMinus(finalProduct: FinalProduct) {
+    this.ourProductsService.minus(finalProduct.product);
+    this.totalCost = this.ourProductsService.returnPrice();
   }
 
-  counterPlus(price: number) {
-    this.ourProductsService.plus(this.counter);
-    this.counter = this.ourProductsService.returnQuantity();
-    this.ourProductsService.refresh(price);
-    this.totalCost = this.ourProductsService.returnTotalCost();
+  counterPlus(finalProduct: FinalProduct) {
+    this.ourProductsService.writeOnTheList(finalProduct.product);
+    this.totalCost = this.ourProductsService.returnPrice();
   }
 
-  removeProduct(finalProductsArrayRefresh: FinalProduct) {
-    console.log(finalProductsArrayRefresh.finalId); // OK
-    this.ourProductsService.remove(finalProductsArrayRefresh);
-    this.finalProductsArrayRefresh = this.ourProductsService.returnArray();
+  removeProduct(position: FinalProduct) {
+    console.log(position.finalId); // OK
+    this.ourProductsService.remove(position);
+    this.finalProductsArray = this.ourProductsService.returnFinalProducts();
+    this.totalCost = this.ourProductsService.returnPrice();
   }
 
 

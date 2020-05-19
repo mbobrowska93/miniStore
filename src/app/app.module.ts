@@ -4,12 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OurProductsService } from './our-products.service';
-
+import { FilterPipePipe } from './filter-pipe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    FilterPipePipe,
   ],
   imports: [
     BrowserModule,
