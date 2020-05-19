@@ -1,4 +1,6 @@
-<input class="search" placeholder="Search by name" [(ngModel)]="searchText"><br><br>
+<div class="searchField">
+    <input  class="search" placeholder="Search by name" [(ngModel)]="searchText"><br><br>
+</div>
 <div>
 <table class="myTable">
     <thead>
@@ -23,7 +25,7 @@
     </tbody>
 </table>
 </div>
-<div style="margin-left: 180px; margin-top: 20px;">
+<div style="margin-top: 20px; text-align: center">
     <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event">
     </pagination-controls>
 </div>
