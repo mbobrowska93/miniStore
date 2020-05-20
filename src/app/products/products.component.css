@@ -44,3 +44,15 @@ thead{
     font-weight: bold;
 }
 
+.continueButton{
+    margin-right: 250px; 
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 6px;
+}
+
+.closeButton {
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 6px;
+}

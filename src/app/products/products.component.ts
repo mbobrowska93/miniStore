@@ -26,6 +26,10 @@ export class ProductsComponent implements OnInit {
   }
   addToCart(myProduct: Product) {
     this.ourProductsService.writeOnTheList(myProduct);
+    // this.router.navigateByUrl('/cart', {});
+  }
+  goToCart() {
     this.router.navigateByUrl('/cart', {});
   }
 }
+

@@ -1,33 +1,51 @@
 <div class="searchField">
-    <input  class="search" placeholder="Search by name" [(ngModel)]="searchText"><br><br>
+    <input class="search" placeholder="Search by name" [(ngModel)]="searchText"><br><br>
 </div>
 <div>
-<table class="myTable">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <td>IMAGE</td>
-            <td>NAME</td>
-            <td>PRICE</td>
-            <td>OPTIONS</td>
-        </tr>
-    </thead>
+    <table class="myTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <td>IMAGE</td>
+                <td>NAME</td>
+                <td>PRICE</td>
+                <td>OPTIONS</td>
+            </tr>
+        </thead>
 
-    <tbody>
-        <tr
-            *ngFor="let product of productsArray | filterPipe :searchText | paginate: { id: 'listing_pagination', itemsPerPage: 10, currentPage: page, totalItems: totalRecords}">
-            <th>{{product.id}}.</th>
-            <td><a href="{{product.image}}"><img src="{{product.image}}" alt="Photo" class="photo"></a></td>
-            <td>{{product.name}}</td>
-            <td>{{product.price}} PLN</td>
-            <td><button (click)="addToCart(product)" class="addToCart"><i class='fas fa-shopping-cart'></i></button>
-        </tr>
-    </tbody>
-</table>
+        <tbody>
+            <tr
+                *ngFor="let product of productsArray | filterPipe :searchText | paginate: { id: 'listing_pagination', itemsPerPage: 10, currentPage: page, totalItems: totalRecords}">
+                <th>{{product.id}}.</th>
+                <td><a href="{{product.image}}"><img src="{{product.image}}" alt="Photo" class="photo"></a></td>
+                <td>{{product.name}}</td>
+                <td>{{product.price}} PLN</td>
+                <td><button (click)="addToCart(product)" data-toggle="modal" data-target="#myModal" class="addToCart"><i
+                            class='fas fa-shopping-cart'></i></button>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <div style="margin-top: 20px; text-align: center">
     <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event">
     </pagination-controls>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" style="margin-left: 100px">The product has been added to the cart</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="continueButton" data-dismiss="modal">Continue shopping</button>
+                <button type="button" class="closeButton" data-dismiss="modal" (click)="goToCart()">Go to cart</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <router-outlet></router-outlet>

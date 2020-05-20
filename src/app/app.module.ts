@@ -8,6 +8,7 @@ import { FilterPipePipe } from './filter-pipe.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+
 @NgModule({
   declarations: [
     AppComponent,
