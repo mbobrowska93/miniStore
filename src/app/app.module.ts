@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OurProductsService } from './our-products.service';
+import { ProductsService } from './products.service';
 import { FilterPipePipe } from './filter-pipe.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -23,7 +23,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     NgxPaginationModule
   ],
-  providers: [OurProductsService],
+  providers: [ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

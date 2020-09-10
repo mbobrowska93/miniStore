@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { OurProductsService } from '../our-products.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductsService } from '../products.service';
 import { Product } from '../product';
 
 @Component({
@@ -18,15 +17,14 @@ export class ProductsComponent implements OnInit {
   finalId = 0;
   searchText;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private ourProductsService: OurProductsService) { }
+  constructor(private router: Router, private ProductsService: ProductsService) { }
 
   ngOnInit(): void {
-    this.productsArray = this.ourProductsService.returnProducts();
+    this.productsArray = this.ProductsService.returnProducts();
 
   }
   addToCart(myProduct: Product) {
-    this.ourProductsService.writeOnTheList(myProduct);
-    // this.router.navigateByUrl('/cart', {});
+    this.ProductsService.writeOnTheList(myProduct);
   }
   goToCart() {
     this.router.navigateByUrl('/cart', {});

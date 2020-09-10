@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product';
-import { FinalProduct } from './finalProduct';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class OurProductsService {
+export class DataInitializerService {
 
   private p1: Product = new Product(1, 'Bojownik wspaniały', 8, 'https://i.pinimg.com/474x/71/46/01/714601c83b4b464ccaffc39a8cb0a6c7.jpg');
   private p2: Product = new Product(2, 'Błazenek', 58, 'https://serwer1428786.home.pl/rybka/ZDJ/rybki/nemo.jpg');
@@ -25,60 +23,10 @@ export class OurProductsService {
   private p15: Product = new Product(15, 'Motylek czarnopręgi', 143, 'https://lh3.googleusercontent.com/proxy/PcvqzhrXzykz_Plg2hE91VZiBA4YNN8TbcbOO63D4zfyeM3K9cI_oDWhWp9PPZ7b1zJQ2iIaflZICNZ-Wkr8g30vdWg-R5VcTdxt872uCjH6DXEywQUFMPsEC7grfyr134g9');
 
   private myArray: Product[] = [this.p1, this.p2, this.p3, this.p4, this.p5, this.p6, this.p7, this.p8, this.p9, this.p10, this.p11, this.p12, this.p13, this.p14, this.p15];
-  private cartArray: FinalProduct[] = [];
-  counter: number;
-  totalCost: number;
-  price = 0;
-
 
   constructor() { }
 
-
-
-  returnProducts(): Product[] {
+  returnProducts() {
     return this.myArray;
   }
-
-  returnPrice() {
-    return this.price;
-  }
-
-  writeOnTheList(selectedProduct: Product) {
-
-    if (this.cartArray.filter(x => x.product.id === selectedProduct.id).length > 0) {
-      let position = this.cartArray.findIndex(x => x.product.id === selectedProduct.id);
-      this.cartArray[position].count += 1;
-      this.price += selectedProduct.price;
-    }
-    else {
-      const myFinalProduct: FinalProduct = new FinalProduct(selectedProduct, 1, this.cartArray.length + 1);
-      this.cartArray.push(myFinalProduct);
-      this.price += (myFinalProduct.count * selectedProduct.price);
-    }
-  }
-
-  minus(selectedProduct: Product) {
-    if (this.cartArray.filter(x => x.product.id === selectedProduct.id).length > 0) {
-      // sprawdzam wsrod iksow (czyli produktow z tablicy cartArray), czy jakis x (x.product.id) juz istnieje z tym id co moj selected product
-      let position = this.cartArray.findIndex(x => x.product.id === selectedProduct.id);
-      if (this.cartArray[position].count > 0) {
-        this.cartArray[position].count -= 1;
-        this.price -= selectedProduct.price;
-      }
-      else if (this.cartArray[position].count === 0) { // jak juz jest 0 to jeszcze raz trzeba kliknac - zeby usunelo
-        this.cartArray.splice(position, 1);
-        return this.cartArray;
-      }
-    }
-  }
-
-  remove(e: FinalProduct) {
-    this.cartArray = this.cartArray.filter(x => x.finalId !== e.finalId);
-    this.price -= (e.product.price * e.count);
-  }
-
-  returnFinalProducts(): FinalProduct[] {
-    return this.cartArray;
-  }
-
 }

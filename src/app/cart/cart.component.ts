@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { OurProductsService } from '../our-products.service';
+import { Router } from '@angular/router';
+import { ProductsService } from '../products.service';
 import { FinalProduct } from '../finalProduct';
 
 @Component({
@@ -14,26 +13,26 @@ export class CartComponent implements OnInit {
   finalProductsArray: FinalProduct[] = [];
   totalCost: number;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private ourProductsService: OurProductsService) { }
+  constructor(private router: Router, private ProductsService: ProductsService) { }
 
   ngOnInit(): void {
-    this.finalProductsArray = this.ourProductsService.returnFinalProducts();
-    this.totalCost = this.ourProductsService.returnPrice();
+    this.finalProductsArray = this.ProductsService.returnFinalProducts();
+    this.totalCost = this.ProductsService.returnPrice();
   }
 
   counterMinus(finalProduct: FinalProduct) {
-    this.ourProductsService.minus(finalProduct.product);
-    this.totalCost = this.ourProductsService.returnPrice();
+    this.ProductsService.minus(finalProduct.product);
+    this.totalCost = this.ProductsService.returnPrice();
   }
 
   counterPlus(finalProduct: FinalProduct) {
-    this.ourProductsService.writeOnTheList(finalProduct.product);
-    this.totalCost = this.ourProductsService.returnPrice();
+    this.ProductsService.writeOnTheList(finalProduct.product);
+    this.totalCost = this.ProductsService.returnPrice();
   }
 
   removeProduct(position: FinalProduct) {
-    this.ourProductsService.remove(position);
-    this.finalProductsArray = this.ourProductsService.returnFinalProducts();
-    this.totalCost = this.ourProductsService.returnPrice();
+    this.ProductsService.remove(position);
+    this.finalProductsArray = this.ProductsService.returnFinalProducts();
+    this.totalCost = this.ProductsService.returnPrice();
   }
 }
