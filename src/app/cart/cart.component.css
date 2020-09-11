@@ -1,4 +1,4 @@
-.removeIt{
+.removeIt, .plusminus {
     font-size: 15px;
     float: center;
     width: 30px;
@@ -7,26 +7,12 @@
     border-radius: 4px;
 }
 
-.plusminus{
-    font-size: 15px;
-    float: center;
-    width: 30px; 
-    height: 30px;
-    border: 1px solid lightgray;
-    border-radius: 4px;
-}
-
-.quantity{
+.quantity, .totalCost {
     width: 60px;
     text-align: center;
 }
 
-.totalCost{
-    width: 60px;
-    text-align: center;
-}
-
-.myTable{
+.myTable {
     width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -40,15 +26,15 @@ td, th {
     height: 50px;
 }
 
-.openImage{
+.openImage {
     font-size: 15px;
     float: center;
-    width: 40px; 
+    width: 40px;
     height: 30px;
     border: 1px solid lightgray;
     border-radius: 4px;
 }
 
-thead{
+thead {
     font-weight: bold;
 }
